@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <div class="LoginIndex">
       <div class="nav">
         <div class="navTitle appDownload">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Dialog from './components/Dialog.vue';
+import Dialog from "./components/Dialog.vue";
 export default {
   components: { Dialog },
   data() {
@@ -73,14 +73,18 @@ export default {
   margin: 0;
   padding: 0;
 }
-body {
+.home {
   background-image: url("@/assets/login/bg@3x.png");
   background-position: center center;
   background-repeat: no-repeat;
   /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
   background-attachment: fixed;
   background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
+
 .LoginIndex {
   position: relative;
   .nav {

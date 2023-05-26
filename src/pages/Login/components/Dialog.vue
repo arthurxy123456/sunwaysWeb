@@ -27,7 +27,7 @@ export default {
     } else if (this.$route.name == "register") {
       this.type = "register";
     } else if (this.$route.name == "forget") {
-      this.type = "register";
+      this.type = "forget";
     }
     this.pubRegisterID = pubsub.subscribe("showRegister", (msgName, data) => {
       this.type = data;

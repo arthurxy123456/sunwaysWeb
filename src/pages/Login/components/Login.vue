@@ -20,7 +20,7 @@
       />
       <img class="icon icon-right" src="@/assets/login/关闭@3x.png" />
     </div>
-    <button>登录</button>
+    <button @click="login">登录</button>
     <div class="loginText">
       <div @click="goRegister(type[1])">注册</div>
       <div @click="goForget(type[2])">忘记密码?</div>
@@ -36,7 +36,7 @@ export default {
     return {
       user: "",
       password: "",
-      type: ["登录", "注册", "忘记密码"],
+      type: ["login", "register", "forget"],
     };
   },
   methods: {
@@ -46,16 +46,22 @@ export default {
         name: "register",
       });
       pubsub.publish('showRegister',data)
-      window.location.reload()
+      // window.location.reload()
     },
     // 去忘记密码页面
     goForget(data) {
-      this.$router.go({
-        name: "forget ",
+      this.$router.push({
+        name: "forget",
       });
       pubsub.publish('showForget',data)
-      window.location.reload()
+      // window.location.reload()
     },
+    // 登录去总览页面
+    login(){
+      this.$router.push({
+        name: "layout",
+      })
+    }
   },
 };
 </script>
@@ -72,6 +78,7 @@ export default {
     position: relative;
     display: inline-block;
   }
+  // input{text-indent:4px;}
   .passwordInput {
     position: relative;
     display: inline-block;
@@ -84,7 +91,7 @@ export default {
   }
 
   .icon-left {
-    left: 10px;
+    left: 16px;
   }
 
   .icon-right {

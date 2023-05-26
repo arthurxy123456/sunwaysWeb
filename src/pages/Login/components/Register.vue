@@ -11,20 +11,27 @@
       </div>
       <el-form label-position="top">
         <el-form-item label="*用户名" prop="name">
-          <el-input></el-input>
+          <el-input placeholder="请输入用户名"></el-input>
         </el-form-item>
         <el-form-item label="*邮箱">
-          <el-input></el-input>
+          <el-input placeholder="请输入邮箱"></el-input>
         </el-form-item>
         <el-form-item label="*验证码">
-          <el-input></el-input>
-          <!-- <template> 获取验证码 </template> -->
+          <el-input class="code" placeholder="请输入验证码">
+            <span slot="suffix" @click="getCode"> 获取验证码 </span>
+          </el-input>
         </el-form-item>
         <el-form-item label="*密码">
-          <el-input suffix-icon="el-icon-view"></el-input>
+          <el-input
+            suffix-icon="el-icon-view"
+            placeholder="请输入密码"
+          ></el-input>
         </el-form-item>
         <el-form-item label="*密码确认">
-          <el-input suffix-icon="el-icon-view"></el-input>
+          <el-input
+            suffix-icon="el-icon-view"
+            placeholder="请再次输入密码"
+          ></el-input>
         </el-form-item>
         <el-checkbox>
           <div>
@@ -32,7 +39,7 @@
             >和<span style="color: #ed6d00">《使用条款》</span>
           </div>
         </el-checkbox>
-        <button class="register" @click="nextDeploy">业主注册</button>
+        <button class="registerBtn" @click="nextDeploy">业主注册</button>
       </el-form>
     </div>
 
@@ -104,7 +111,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 * {
   margin: 0;
   padding: 0;
@@ -134,38 +141,56 @@ export default {
     }
   }
 
-  .el-form-item {
+  ::v-deep .el-form-item {
     margin-bottom: 0px;
   }
-  .el-form-item__label {
+  ::v-deep .el-form-item__label {
     margin-bottom: -50px;
   }
-  .el-input__inner {
+  ::v-deep .el-input__inner {
     width: 360px;
     height: 32px;
     border-radius: 16px;
   }
-  .el-checkbox {
+  ::v-deep .el-checkbox {
     margin-top: 20px;
   }
-  .el-checkbox__input.is-checked .el-checkbox__inner,
+  ::v-deep .el-checkbox__input.is-checked .el-checkbox__inner,
   .el-checkbox__input.is-indeterminate .el-checkbox__inner {
     background-color: #ed6d00;
     border-color: #ed6d00;
   }
-  .el-checkbox__input.is-checked + .el-checkbox__label {
+  ::v-deep .el-checkbox__input.is-checked + .el-checkbox__label {
     color: #666;
   }
-  .el-input__icon {
+  ::v-deep .el-input__icon {
     margin-top: 15px;
+  }
+  ::v-deep .code .el-input__inner {
+    width: 250px;
+    height: 32px;
+  }
+
+  ::v-deep .code .el-input__suffix-inner {
+    display: flex;
+    color: #ed6d00;
+    margin-top: 25px;
+    margin-right: -4px;
+    cursor: pointer;
   }
   button {
     width: 360px;
     height: 32px;
     border-radius: 16px;
+    margin-top: 40px;
+    font-size: 14px;
   }
 }
 
+::v-deep .el-input__inner::placeholder {
+  left: 15px;
+  bottom: 7px;
+}
 // 新用户配置
 .deploy {
   font-size: 14px;
@@ -198,38 +223,42 @@ export default {
       color: #333;
     }
   }
-  .el-form-item {
+  ::v-deep .el-form-item {
     margin-bottom: 0px;
   }
-  .el-form-item__label {
+  ::v-deep .el-form-item__label {
     margin-bottom: -50px;
   }
-  .el-input__inner {
+  ::v-deep .el-input__inner {
     width: 360px;
     height: 32px;
     border-radius: 16px;
   }
-  .el-input__icon {
-    margin-top: 15px;
+  ::v-deep .el-input__icon {
+    margin-top: -11px;
   }
   button {
     width: 170px;
     height: 32px;
     border-radius: 16px;
   }
-  .my-select .el-input__placeholder {
+  ::v-deep .my-select .el-input__placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .el-switch__core {
+  ::v-deep .el-switch__core {
     // margin-right: -200px;
     margin-top: -15px;
     left: 317px;
   }
-  .el-input__suffix {
+  ::v-deep .el-input__suffix {
     top: 25px;
     color: #666666;
+    font-size: 14px;
+  }
+  button {
+    margin-top: 40px;
     font-size: 14px;
   }
 }
