@@ -33,14 +33,14 @@
         <div>Copyright © 2023 SUNWAYS Inc. All rights reserved.</div>
       </div>
     </div>
-    <Login />
+    <Dialog />
   </div>
 </template>
 
 <script>
-import Login from "./components/Login.vue";
+import Dialog from './components/Dialog.vue';
 export default {
-  components: { Login },
+  components: { Dialog },
   data() {
     return {
       languageList: [
@@ -186,5 +186,40 @@ body {
     left: 50%;
     transform: translateX(-50%);
   }
+}
+// 公共样式
+input {
+  height: 48px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e0e0e0;
+  line-height: 24px;
+  margin-top: 30px;
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+input::placeholder {
+  position: absolute;
+  left: 40px;
+  padding-top: 15px;
+}
+button {
+  cursor: pointer;
+  width: 360px;
+  height: 48px;
+  background-color: #ed6d00;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin-top: 40px;
 }
 </style>

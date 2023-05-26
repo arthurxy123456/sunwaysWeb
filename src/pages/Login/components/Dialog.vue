@@ -1,44 +1,44 @@
 <template>
   <div class="dialog">
     <!-- 登录 -->
-    <div class="login">
-      <img src="@/assets/login/logo@2x.png" alt="" />
-      <div class="userInput">
-        <img class="icon icon-left" src="@/assets/login/用户名@3x.png" />
-        <input
-          placeholder="请输入用户名"
-          v-model="user"
-          style="width: 360px"
-          class="user"
-        />
-      </div>
-      <div class="passwordInput">
-        <img class="icon icon-left" src="@/assets/login/密码@3x.png" />
-        <input
-          placeholder="请输入密码"
-          v-model="password"
-          style="width: 360px"
-          class="password"
-        />
-        <img class="icon icon-right" src="@/assets/login/关闭@3x.png" />
-      </div>
-      <button>登录</button>
-      <div class="loginText">
-        <div>注册</div>
-        <div>忘记密码?</div>
-      </div>
-    </div>
+    <Login v-show="type === 'login'" />
     <!-- 注册 -->
+    <Register v-show="type === 'register'" />
+    <!-- 忘记密码 -->
+    <Forget v-show="type === 'forget'" />
   </div>
 </template>
 
 <script>
+import pubsub from "pubsub-js";
+import Login from "./Login.vue";
+import Forget from "./Forget.vue";
+import Register from "./Register.vue";
 export default {
+  components: { Login, Register, Forget },
   data() {
     return {
-      user: "",
-      password: "",
+      type: "login",
     };
+  },
+  mounted() {
+    if (this.$route.name == "login") {
+      this.type = "login";
+    } else if (this.$route.name == "register") {
+      this.type = "register";
+    } else if (this.$route.name == "forget") {
+      this.type = "register";
+    }
+    this.pubRegisterID = pubsub.subscribe("showRegister", (msgName, data) => {
+      this.type = data;
+    });
+    this.pubForgetID = pubsub.subscribe("showForget", (msgName, data) => {
+      this.type = data;
+    });
+  },
+  beforeDestroy() {
+    pubsub.unsubscribe(this.pubRegisterID);
+    pubsub.unsubscribe(this.pubForgetID);
   },
 };
 </script>
@@ -49,8 +49,6 @@ export default {
   padding: 0;
 }
 .dialog {
-  width: 440px;
-  height: 394px;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
@@ -59,85 +57,5 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  //   登录模态框样式
-  .login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .userInput {
-      position: relative;
-      display: inline-block;
-    }
-    .passwordInput {
-      position: relative;
-      display: inline-block;
-    }
-    .icon {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 6%;
-    }
-
-    .icon-left {
-      left: 10px;
-    }
-
-    .icon-right {
-      right: 10px;
-    }
-    img {
-      width: 175px;
-      margin-top: 40px;
-    }
-    .loginText {
-      width: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 28px;
-      font-weight: 400;
-      color: #ed6d00;
-      line-height: 24px;
-      cursor: pointer;
-    }
-  }
-}
-
-// 公共样式
-input {
-  height: 48px;
-  background: #ffffff;
-  border-radius: 24px;
-  border: 1px solid #e0e0e0;
-  line-height: 24px;
-  margin-top: 30px;
-  border: none;
-}
-
-input:focus {
-  outline: none;
-}
-input::placeholder {
-  position: absolute;
-  left: 40px;
-  padding-top: 15px;
-}
-button {
-  cursor: pointer;
-  width: 360px;
-  height: 48px;
-  background-color: #ed6d00;
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 500;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  margin-top: 40px;
 }
 </style>
