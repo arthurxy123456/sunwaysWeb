@@ -80,12 +80,19 @@ export default {
   padding: 0;
 }
 .navMenu {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  .el-menu-demo {
+    width: 100%;
+  }
   .logo {
     width: 146px;
     height: 28px;
     margin-left: 10%;
   }
-  .navTitleFirst{
+  .navTitleFirst {
     margin-left: 20%;
   }
   .navTitle {
